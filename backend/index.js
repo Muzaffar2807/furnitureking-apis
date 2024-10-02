@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   cors({
-    origin: "https://hindwala.netlify.app/",
+    origin: "https://hindwala.netlify.app",
     credentials: true,
   })
 ); 
