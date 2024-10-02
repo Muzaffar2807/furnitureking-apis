@@ -20,10 +20,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors({
+/* app.use(cors({
   origin: "https://furnitureking-test.netlify.app",
   credentials: true
-}));
+})); */
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true,
+  })
+);
 app.use("/", indexRouter);
 app.use("/api/", apiRoutes);
 
@@ -40,7 +46,7 @@ mongoose
       console.log("Press CTRL + C to stop the process. \n");
   })
   .catch((err) => {
-    console.error("App starting error:", err.message);
+    console.error("App starting error:", err.message);w
     process.exit(1);
   });
 

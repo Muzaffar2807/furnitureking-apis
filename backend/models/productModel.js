@@ -36,22 +36,9 @@ const product = new mongoose.Schema(
       required: true,
     },
     category: {
-      type: String,
-      enum: [
-        "Sofas",
-        "Chairs",
-        "Beds",
-        "Tables",
-        "Dining Tables",
-        "Mattress",
-        "Bean Bags",
-        "Wardrobes",
-        "Tea Tables",
-        "Bedsheets",
-        "Curtains",
-        "Wallpapers",
-        "Others",
-      ],
+      type: ObjectId,
+      ref: "Category",
+      required: true
     },
     featured_product: {
       type: Boolean,

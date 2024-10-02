@@ -3,6 +3,7 @@ const apiResponse = require("../helpers/apiResponse");
 const uploadToCloudinary = require("../utils/cloudinary");
 const cloudinary = require("../config/cloudinary");
 const cartItemDataServiceProvider = require("../services/cartItemDataServiceProvider");
+const categoryModel = require("../models/categoryModel");
 
 const addProduct = async (req, res) => {
   try {
@@ -26,7 +27,7 @@ const addProduct = async (req, res) => {
       }
 
       data.images = cloudinaryResponses;
-    })
+    });
 
     await Promise.all(uploadTasks);
     const price = data.price;
@@ -66,13 +67,18 @@ const getAllProduct = async (req, res) => {
 
     let query = {};
     if (req.query.category) {
-      query.category = req.query.category;
+      const categoryid = await categoryModel.findOne({
+        categoryName: req.query.category,
+      });
+      if (categoryid) {
+        query.category = categoryid.id;
+      }
     }
     if (req.query.productName) {
       const regex = new RegExp(req.query.productName, "i");
       query.name = { $regex: regex };
     }
-    query.status = 'Active'
+    query.status = "Active";
     const total = await productDataServiceProvider.count();
     const product = await productDataServiceProvider.getAllProduct(
       query,
@@ -199,7 +205,7 @@ const updateProduct = async (req, res) => {
     const discountPercentage = ((price - offerPrice) / price) * 100;
     data.discount = Math.floor(discountPercentage);
     if (data.quantity > 0) {
-      data.status = "Active"
+      data.status = "Active";
     }
 
     const product = await productDataServiceProvider.updateProduct(
@@ -305,5 +311,5 @@ module.exports = {
   deleteProduct,
   getStatsOfProductsBasedOnStatus,
   getListOfFeaturedProduct,
-  getAllProductByAdmin
+  getAllProductByAdmin,
 };

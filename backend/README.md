@@ -1,4 +1,4 @@
-<!-- FurnitureKing -->
+<!-- Hind Wala -->
 <!-- 
 RAZORPAY, 
     account settings -> API keys -> key Id -> Key secret

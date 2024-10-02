@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('Welcome to FURNITURE KING');
+  res.send('Welcome to HIND WALA');
 });
 
 module.exports = router;

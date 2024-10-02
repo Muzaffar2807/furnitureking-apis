@@ -8,7 +8,7 @@ class cartItemDataServiceProvider {
   }
   async getCart(userid, startIndex, limit, sort) {
     return await cartItemModel
-      .find({ user: userid, status: "active" })
+      .find({ user: userid, status: "Active" })
       .skip(startIndex)
       .limit(limit)
       .sort(sort)
@@ -16,7 +16,7 @@ class cartItemDataServiceProvider {
   }
   async getCartOfUser(userId) {
     return await cartItemModel
-      .find({ user: userId, status: "active" })
+      .find({ user: userId, status: "Active" })
       .populate("product_id");
   }
   async getCartByProductId(productId, userid) {
